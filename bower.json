@@ -1,0 +1,24 @@
+{
+  "name": "SumoLogic UI Exercise",
+  "authors": [
+    "anshckr <anshgm123@gmail.com>"
+  ],
+  "description": "Implements simple select fields for dummy data of Employee and their team",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.6",
+    "select2": "~4.0.1"
+  }
+}

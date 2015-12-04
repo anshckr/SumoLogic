@@ -1,0 +1,15 @@
+.cancel_btn, .ok_btn {
+  width: 100px;
+}
+
+#dialog {
+  width: 400px;
+  border: 1px solid black;
+  margin-top: 20px;
+  font-family: arial;
+}
+
+.send_mail span {
+  vertical-align: middle;
+  padding-left: 3px;
+}
