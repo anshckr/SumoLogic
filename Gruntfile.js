@@ -48,9 +48,7 @@ module.exports = function(grunt) {
     }
   });
   // Load tasks
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-serve');
   grunt.registerTask('default', 'watch');
   // Creates the `server` task
   grunt.registerTask('server', [

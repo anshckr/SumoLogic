@@ -1,4 +1,4 @@
-# SumoLogi (UI Exercise) - This is a single page application and contains a basic implementation of select boxes for team and the employees working in that team.
+# SumoLogi (UI Exercise) - This is a single page application and contains a basic implementation of a dialog which uses select boxes to select team and the employees working in that team.
 
 ## Getting Started
 

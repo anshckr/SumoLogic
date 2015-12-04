@@ -89,6 +89,8 @@ angular.module('myApp.main', []).controller('MainController', [
       });
       ele_emp.select2('val', '');
       ele_emp.find('option:not(:first)').remove();
+      // Uncheck send mail check-box
+      $('.send_mail input').attr('checked', false);
     };
     /**
      * [updateSelect2 update employee select2 based on team selected]
@@ -97,7 +99,7 @@ angular.module('myApp.main', []).controller('MainController', [
       var team_name = $scope.data[index].team;
       var data = $scope.convert_employees_into_select2_object($scope.data, team_name);
       $('#employee').find('option:not(:first)').remove();
-      $('#employee').select2("destroy").select2({
+      $('#employee').select2({
         placeholder: 'Select an Employee...',
         data: data,
         width: '100%'
@@ -108,6 +110,7 @@ angular.module('myApp.main', []).controller('MainController', [
      */
     $scope.clearSearch = function() {
       $scope.initialise();
+      $('#overlay').addClass('hide');
     };
     /**
      * [sendRequest handler when 'OK' is clicked]
@@ -115,6 +118,7 @@ angular.module('myApp.main', []).controller('MainController', [
     $scope.sendRequest = function() {
       if (!!$('#employee').val()) {
         $window.alert('Request Sent!!');
+        $('#overlay').addClass('hide');
       } else {
         $window.alert('Please fill-in values for both Team and Employee!!');
       }
@@ -123,8 +127,18 @@ angular.module('myApp.main', []).controller('MainController', [
     $scope.$watch('index', function(newValue, oldValue) {
       // access new and old value here
       if (!!newValue) {
-        $scope.updateEmployeeSelect(parseInt(newValue, 10)-1);
+        $scope.updateEmployeeSelect(parseInt(newValue, 10) - 1);
       }
     });
+    /**
+     * [showHideOverlay show/hide dialog]
+     */
+    $scope.showHideOverlay = function() {
+      var ele_overlay = $('#overlay');
+      ele_overlay.toggleClass('hide');
+      if (!ele_overlay.hasClass('hide')) {
+        $scope.initialise();
+      }
+    };
   }
 ]);

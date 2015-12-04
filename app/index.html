@@ -18,29 +18,36 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
-    <div id="dialog" class="container" ng-controller="MainController as main">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="text-primary"> Select an Employee </h3>
-                <div class="form-group send_mail">
-                    <input type="checkbox" name="send_mail" />
-                    <span>Send welcome email to employee</span>
-                </div>
-                <div class="form-group">
-                    <label>Select a Team in the Organisation</label>
-                    <select id="team" name="team" class="form-control select-width" ng-model="index">
-                        <option></option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Select an Employee</label>
-                    <select id="employee" name="employee" class="form-control select-width">
-                        <option></option>
-                    </select>
-                </div>
-                <div class="form-group text-right">
-                    <button type="button" class="btn btn-default cancel_btn" ng-click="clearSearch()">Cancel</button>
-                    <button type="button" class="btn btn-info ok_btn" ng-click="sendRequest()">OK</button>
+    <div ng-controller="MainController as main">
+        <div class="container">
+            <button type="button" class="btn btn-default showHide_btn" ng-click="showHideOverlay()">Show/Hide Dialog</button>
+        </div>
+        <div id="overlay" class="hide">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="text-primary"> Select an Employee </h3>
+                        <div class="form-group send_mail">
+                            <input type="checkbox" name="send_mail" />
+                            <span>Send welcome email to employee</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Select a Team in the Organisation</label>
+                            <select id="team" name="team" class="form-control select-width" ng-model="index">
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Select an Employee</label>
+                            <select id="employee" name="employee" class="form-control select-width">
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="form-group text-right">
+                            <button type="button" class="btn btn-default cancel_btn" ng-click="clearSearch()">Cancel</button>
+                            <button type="button" class="btn btn-info ok_btn" ng-click="sendRequest()">OK</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
