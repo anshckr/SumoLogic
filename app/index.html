@@ -9,8 +9,8 @@
 <head>
     <meta charset="utf-8">
     <title>SumoLogic UI exercise</title>
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/bower_components/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -21,40 +21,35 @@
     <div id="dialog" class="container" ng-controller="MainController as main">
         <div class="row">
             <div class="col-md-12">
-                <h3> Select an Employee </h3>
+                <h3 class="text-primary"> Select an Employee </h3>
                 <div class="form-group send_mail">
                     <input type="checkbox" name="send_mail" />
                     <span>Send welcome email to employee</span>
                 </div>
-                <!-- /input-group -->
                 <div class="form-group">
-                    <h4>Select a Team in the Organisation</h4>
-                    <select id="team" name="team" class="form-control select-width" ng-model="index" ng-change="updateSelect2()">
+                    <label>Select a Team in the Organisation</label>
+                    <select id="team" name="team" class="form-control select-width" ng-model="index">
                         <option></option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <h4>Select an Employee</h4>
+                    <label>Select an Employee</label>
                     <select id="employee" name="employee" class="form-control select-width">
                         <option></option>
                     </select>
                 </div>
                 <div class="form-group text-right">
-                    <button type="button" class="btn btn-default cancel_btn">Cancel</button>
-                    <button type="button" class="btn btn-info ok_btn">OK</button>
+                    <button type="button" class="btn btn-default cancel_btn" ng-click="clearSearch()">Cancel</button>
+                    <button type="button" class="btn btn-info ok_btn" ng-click="sendRequest()">OK</button>
                 </div>
             </div>
-            <!-- /.col-md-6 -->
         </div>
     </div>
-    <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/bower_components/select2/dist/js/select2.full.min.js"></script>
-    <script src="/bower_components/angular/angular.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
     <script src="js/app.js"></script>
-    <script src="/app/js/controllers/main.js"></script>
+    <script src="js/controllers/main.js"></script>
 </body>
 
 </html>

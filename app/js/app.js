@@ -1,6 +1,7 @@
-'use strict';
-angular.module('myApp', ['myApp.main']);
-// (function() {
-//   // Declare app level module which depends on views, and components
-  
-// })();
+/**
+ * main application file
+ */
+(function () {
+   'use strict';
+   angular.module('myApp', ['myApp.main']);
+}());

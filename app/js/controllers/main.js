@@ -4,21 +4,48 @@ angular.module('myApp.main', []).controller('MainController', [
   '$window',
   '$timeout',
   function($scope, $window, $timeout) {
-    $scope.data = [
-    {
+    /**
+     * [data dummy data for select boxes]
+     * @type {Array}
+     */
+    $scope.data = [{
       team: 'Engineering',
-      employees: ['Lawana Fan', 'Larry Rainer', 'Rahul Malik', 'Leah Shumway']
+      employees: [
+        'Lawana Fan',
+        'Larry Rainer',
+        'Rahul Malik',
+        'Leah Shumway'
+      ]
     }, {
       team: 'Executive',
-      employees: ['Rohan Gupta', 'Ronda Dean', 'Robby Maharaj']
+      employees: [
+        'Rohan Gupta',
+        'Ronda Dean',
+        'Robby Maharaj'
+      ]
     }, {
       team: 'Finance',
-      employees: ['Caleb Brown', 'Carol Smithson', 'Carl Sorensen']
+      employees: [
+        'Caleb Brown',
+        'Carol Smithson',
+        'Carl Sorensen'
+      ]
     }, {
       team: 'Sales',
-      employees: ['Ankit Jain', 'Anjali Maulingkar']
+      employees: [
+        'Ankit Jain',
+        'Anjali Maulingkar'
+      ]
     }];
-    
+    // call initialise after everything has loaded
+    $timeout(function() {
+      $scope.initialise();
+    }, 0);
+    /**
+     * [convert_teams_into_select2_object converts dummy team data into select2 acceptable format]
+     * @param  {[type]} array [dummy data array]
+     * @return {[type]}       [select2 acceptable team data]
+     */
     $scope.convert_teams_into_select2_object = function(array) {
       var count = 1;
       return $.map(array, function(item) {
@@ -28,11 +55,16 @@ angular.module('myApp.main', []).controller('MainController', [
         };
       });
     };
-
+    /**
+     * [convert_employees_into_select2_object converts dummy employee data into select2 acceptable format]
+     * @param  {[type]} array [dummy data array]
+     * @param  {[type]} team  [selected team]
+     * @return {[type]}       [select2 acceptable employee data]
+     */
     $scope.convert_employees_into_select2_object = function(array, team) {
       var count = 1;
-      var obj = $.grep(array, function(v) {
-        return v.team === team;
+      var obj = $.grep(array, function(ele) {
+        return ele.team === team;
       });
       return $.map(obj[0].employees, function(item) {
         return {
@@ -41,31 +73,58 @@ angular.module('myApp.main', []).controller('MainController', [
         };
       });
     };
-
-    $('#team').select2({
-      data: $scope.convert_teams_into_select2_object($scope.data),
-      placeholder: "Select Team...",
-      width: '100%'
-    });
-
-    $('#employee').select2({
-      placeholder: "Select Employee...",
-      width: '100%'
-    });
-    
-    $scope.updateSelect2 = function() {
-      var team = $scope.data[$scope.index].team;
-      $('#employee').select2({
-        placeholder: "Select an Employee...",
-        data: $scope.convert_employees_into_select2_object($scope.data, team),
+    /**
+     * [initialise initialise select2s]
+     */
+    $scope.initialise = function() {
+      $('#team').select2({
+        data: $scope.convert_teams_into_select2_object($scope.data),
+        placeholder: 'Select Team...',
+        width: '100%'
+      });
+      var ele_emp = $('#employee');
+      ele_emp.select2({
+        placeholder: 'Select Employee...',
+        width: '100%'
+      });
+      ele_emp.select2('val', '');
+      ele_emp.find('option:not(:first)').remove();
+    };
+    /**
+     * [updateSelect2 update employee select2 based on team selected]
+     */
+    $scope.updateEmployeeSelect = function(index) {
+      var team_name = $scope.data[index].team;
+      var data = $scope.convert_employees_into_select2_object($scope.data, team_name);
+      $('#employee').find('option:not(:first)').remove();
+      $('#employee').select2("destroy").select2({
+        placeholder: 'Select an Employee...',
+        data: data,
         width: '100%'
       });
     };
-
-    // $('#team').on('change', function(){
-    //   $(this).select2({
-    //     data: _this.convert_into_select2_object(_this.data)
-    //   });
-    // });
+    /**
+     * [clearSearch re-initialise when 'Cancel' button is clicked]
+     */
+    $scope.clearSearch = function() {
+      $scope.initialise();
+    };
+    /**
+     * [sendRequest handler when 'OK' is clicked]
+     */
+    $scope.sendRequest = function() {
+      if (!!$('#employee').val()) {
+        $window.alert('Request Sent!!');
+      } else {
+        $window.alert('Please fill-in values for both Team and Employee!!');
+      }
+    };
+    // watch for changes in team select2 and re-render employee select2
+    $scope.$watch('index', function(newValue, oldValue) {
+      // access new and old value here
+      if (!!newValue) {
+        $scope.updateEmployeeSelect(parseInt(newValue, 10)-1);
+      }
+    });
   }
 ]);
